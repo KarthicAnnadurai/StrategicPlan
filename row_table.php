@@ -15,18 +15,33 @@ $sql_connect->select_db( "testsql");
 $user_name = $_SESSION["user_name"];
 $month = $_SESSION["month"];
 
+$aspect_feild_present = method("aspect_feild_present");
+
+switch ($aspect_feild_present){
+	case 1:
+		require once('field-1.phph');
+		break;
+	
+
+}
+
+function test(){
+	global $table_count, $i, $total_col; 	 	
 echo "<br>table count are: ".$table_count;
 echo "<br>total columns are selected are: ".$total_col;
 echo "<br>total rows are: ".$i;
+}
 
 function dynamicCol($total_cols){
+
+global $table_count, $i, $sql_connect, $user_name ,$month, $catg ,$aspects ;
 	if($total_cols == 6){
      for($current_row = 1; $current_row<=$i;$current_row++){
        $sql_connect->query("INSERT INTO `field_table_values`(`user`, `month`, `catid`, `aspid`, `fieldid`, `col1_value`, `col2_value`, `col3_value`, `col4_value` , `col5_value`, `col6_value`) VALUES ('".$user_name."','".$month."','".$catg."','".$aspects."','".$table_count."','".method('txtbx1-'.$current_row)."','".method('txtbx2-'.$current_row)."','".method('txtbx3-'.$current_row)."','".method('txtbx4-'.$current_row)."','".method('txtbx5-'.$current_row)."','".method('txtbx6-'.$current_row)."')");
       if($sql_connect->error){
 	    die("no inserton on the data base:::::".$sql_connect->error);
        }         
-     }
+     }test();
 	}
 	elseif($total_cols == 5){
      for($current_row = 1; $current_row<=$i;$current_row++){
@@ -34,7 +49,7 @@ function dynamicCol($total_cols){
       if($sql_connect->error){
 	    die("no inserton on the data base:::::".$sql_connect->error);
        }         
-     }
+     }test();
     }
     else if($total_cols == 4){
      for($current_row = 1; $current_row<=$i;$current_row++){
@@ -42,7 +57,7 @@ function dynamicCol($total_cols){
       if($sql_connect->error){
 	    die("no inserton on the data base:::::".$sql_connect->error);
        }         
-     }
+     }test();
     }
     elseif ($total_cols == 3) {
      for($current_row = 1; $current_row<=$i;$current_row++){
@@ -50,7 +65,7 @@ function dynamicCol($total_cols){
       if($sql_connect->error){
 	    die("no inserton on the data base:::::".$sql_connect->error);
        }         
-     }
+     }test();
     }
     elseif($total_cols == 2){
      for($current_row = 1; $current_row<=$i;$current_row++){
@@ -58,10 +73,12 @@ function dynamicCol($total_cols){
       if($sql_connect->error){
 	    die("no inserton on the data base:::::".$sql_connect->error);
        }         
-     }
+     }test();
     }
 
 
 }
+
+dynamicCol($total_col);
 
 
